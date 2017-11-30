@@ -16,7 +16,8 @@ class empresaController extends Controller
      */
     public function index()
     {
-       return ['index' => true];
+       $empresa = empresa::orderBy('id', 'desc')->get();       
+       return view('empresa.indexEmpresa', ['empresas' => $empresa]);       
     }
 
     /**
@@ -42,6 +43,7 @@ class empresaController extends Controller
             $empresa->razon_social = $request->razon;
             $empresa->USER_creadopor = auth()->user()->name;;
             $empresa->save();
+            return view('empresa.create');
     }
 
     /**
