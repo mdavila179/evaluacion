@@ -41,9 +41,10 @@ class empresaController extends Controller
             $empresa = new empresa();           
             $empresa->ruc = $request->name;
             $empresa->razon_social = $request->razon;
-            $empresa->USER_creadopor = auth()->user()->name;;
+            $empresa->USER_creadopor = auth()->user()->name;
             $empresa->save();
             return view('empresa.create');
+
     }
 
     /**
@@ -54,7 +55,7 @@ class empresaController extends Controller
      */
     public function show($id)
     {
-       
+          
     }
 
     /**
@@ -65,7 +66,8 @@ class empresaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empresa = empresa::where('id', '=', $id)->get();;
+        return response()->json($empresa);
     }
 
     /**
@@ -77,7 +79,12 @@ class empresaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $empresa = empresa::findOrFail($id);                       
+        $empresa->ruc = $request->ruc;
+        $empresa->razon_social = $request->nombre;
+        $empresa->USER_modificadopor = auth()->user()->name;
+        $empresa->save();
+        return view("mensajes.msj_correcto")->with("msj","Se actualizó correctamente"); 
     }
 
     /**
@@ -88,6 +95,9 @@ class empresaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $empresa = empresa::find($id);
+        $empresa->delete();
+        return response()->json(1);
     }
+ 
 }

@@ -13,24 +13,30 @@ class persona extends Model
 
 
     protected $fillable = [
-    'dni', 'nombre', 'email', 'USER_creadopor', 'USER_modificadopor', 'USER_eliminadopor', 'idcargo', 'idusuario'
+    'dni', 'nombre', 'email', 'USER_creadopor', 'USER_modificadopor', 'USER_eliminadopor', 'idcargo', 'idusuario', 'idempresa'
     ];
 
     public function cargo()
 	{
 		$foreingKey = 'idcargo';
-		return $this->hasOne(cargo::class, $foreingKey);
+		return $this->belongsTo(cargo::class, $foreingKey);
 	}
 
 	public function usuario()
 	{
 		$foreingKey = 'idusuario';
-		return $this->hasOne(User::class, $foreingKey);
+		return $this->belongsTo(User::class, $foreingKey);
 	}
 
-	public function item()
+	public function empresa()
 	{
-		$foreingKey = 'iditem';
-		return $this->hasMany(item::class, $foreingKey);
+		$foreingKey = 'idempresa';
+		return $this->belongsTo(empresa::class, $foreingKey);
+	}
+
+	public function scopePersonas($query,$scope='')
+	{		
+		return $query->where('idempresa',$scope);
+		
 	}
 }

@@ -13,18 +13,12 @@ class item extends Model
 
 
     protected $fillable = [
-    'nombre', 'descripcion', 'tipo', 'USER_creadopor', 'USER_modificadopor', 'USER_eliminadopor', 'idempresa', 'idencuesta'
+    'nombre', 'descripcion', 'tipo', 'USER_creadopor', 'USER_modificadopor', 'USER_eliminadopor', 'idencuesta'
     ];
-
-    public function empresa()
-	{
-		$foreingKey = 'idempresa';
-		return $this->hasOne(empresa::class, $foreingKey);
-	}
 
 	public function encuesta()
 	{
 		$foreingKey = 'idencuesta';
-		return $this->hasOne(encuesta::class, $foreingKey);
+		return $this->belongsTo(encuesta::class, $foreingKey);
 	}
 }

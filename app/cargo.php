@@ -13,6 +13,12 @@ class cargo extends Model
 
 
     protected $fillable = [
-    'nombre',
+    'nombre', 'iddepartamento'
     ];
+
+    public function departamento()
+	{
+		$foreingKey = 'iddepartamento';
+		return $this->belongsTo(departamento::class, $foreingKey);
+	}
 }

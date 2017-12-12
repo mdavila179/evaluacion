@@ -13,7 +13,12 @@ class empresa extends Model
 
 
     protected $fillable = [
-    'ruc', 'razon_social'
+    'ruc', 'razon_social', 'USER_creadopor', 'USER_modificadopor', 'USER_eliminadopor', 'idempresa'
     ];
 
+    public function getpersona()
+	{
+		$foreingKey = 'idempresa';
+		return $this->belongsTo(persona::class, $foreingKey);
+	}
 }

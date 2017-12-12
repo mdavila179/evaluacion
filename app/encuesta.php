@@ -15,4 +15,11 @@ class encuesta extends Model
     protected $fillable = [
     'titulo', 'descripcion', 'fechapublicacion', 'fechavigencia', 'estado', 'NCU_creadopor', 'ENCU_modificadopor', 'ENCU_eliminadopor'
     ];
+
+    public function empresa()
+	{
+		$foreingKey = 'idempresa';
+		return $this->belongsTo(empresa::class, $foreingKey);
+	}
+
 }

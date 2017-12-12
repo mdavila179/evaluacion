@@ -15,7 +15,7 @@ class CreatePersonasTable extends Migration
     {
         Schema::create('personas', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedBigInteger('dni')->unique();
+            $table->string('dni')->unique();
             $table->string('nombre');
             $table->string('email')->unique()
                 ->comment('Correo electrónico del usuario. Necesario para enviar enlace de restauración de contraseña.');            
@@ -46,6 +46,13 @@ class CreatePersonasTable extends Migration
             $table->foreign('idusuario')
                   ->references('id')
                   ->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+
+            $table->integer('idempresa')->unsigned();
+            $table->foreign('idempresa')
+                  ->references('id')
+                  ->on('empresas')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         

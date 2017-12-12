@@ -13,6 +13,13 @@ class departamento extends Model
 
 
     protected $fillable = [
-    'nombre',
+    'nombre', 'USER_creadopor', 'USER_modificadopor', 'USER_eliminadopor', 'idempresa', 'idempresa'
     ];
+
+    public function empresa()
+	{
+		$foreingKey = 'idempresa';
+		return $this->belongsTo(empresa::class, $foreingKey);
+	}
+
 }

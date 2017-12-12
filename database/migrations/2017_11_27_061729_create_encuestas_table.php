@@ -16,13 +16,13 @@ class CreateEncuestasTable extends Migration
         Schema::create('encuestas', function (Blueprint $table) {
             $table->increments('id')
                 ->comment('Valor autonumérico, llave primaria de la tabla ENCUESTAS.');
-            $table->string('titulo')
+            $table->string('titulo')->unique()
                 ->comment('Título de la encuesta.');
             $table->string('descripcion')->nullable()
                 ->comment('Descripción de la encuesta.');
-            $table->dateTime('fechapublicacion')->nullable()
+            $table->date('fechapublicacion')->nullable()
                 ->comment('Fecha de publicación de la encuesta.');
-            $table->dateTime('fechavigencia')
+            $table->date('fechavigencia')
                 ->comment('Fecha de vigencia de la encuesta. Al cumplise el tiempo estipulado, la encuesta debe cerrarse automáticamente.');
             $table->string('estado')->nullable()
                 ->comment('Descripción del estado de la encuesta. Por defecto: Abierta, Publicada, Cerrada, Finalizada y Eliminada.');
@@ -41,6 +41,13 @@ class CreateEncuestasTable extends Migration
                 ->comment('Usuario que eliminó el registro en la tabla.');
             $table->timestamp('ENCU_fechaeliminado')->nullable()
                 ->comment('Fecha en que se eliminó el registro en la tabla');
+
+            $table->integer('idempresa')->unsigned();
+            $table->foreign('idempresa')
+                  ->references('id')
+                  ->on('empresas')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
 
         });
     }

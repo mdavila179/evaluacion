@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class peso extends Model
 {
+	const CREATED_AT = 'USER_fechacreado';
+	const UPDATED_AT = 'USER_fechamodificado';
+	const DELETED_AT = 'USER_fechaeliminado';
+	protected $dates = ['USER_fechacreado', 'USER_fechamodificado', 'USER_fechaeliminado'];
 
     protected $fillable = [
-    'valor', 'tipo', 'iditem'
+    'pcompetencia', 'pfuncion', 'pobjetivo', 'USER_creadopor', 'USER_modificadopor', 'USER_eliminadopor', 'idencuesta'
     ];
 
-     public function item()
+     public function encuesta()
 	{
-		$foreingKey = 'iditem';
-		return $this->hasOne(item::class, $foreingKey);
+		$foreingKey = 'idencuesta';
+		return $this->belongsTo(encuesta::class, $foreingKey);
 	}
 
 }

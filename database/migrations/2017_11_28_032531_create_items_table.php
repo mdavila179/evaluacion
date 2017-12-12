@@ -38,12 +38,6 @@ class CreateItemsTable extends Migration
                 ->comment('Fecha en que se eliminó el registro en la tabla.');
                 
             //Relaciones
-            $table->integer('idempresa')->unsigned();
-            $table->foreign('idempresa')
-                  ->references('id')
-                  ->on('empresas')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
 
             $table->integer('idencuesta')->unsigned();
             $table->foreign('idencuesta')
